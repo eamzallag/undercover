@@ -165,17 +165,17 @@ The model doesn't change from the skeleton: `openai/gpt-6-luna` at low reasoning
 
 **Success criteria**
 
-- [ ] `GET /api/instructions` returns the instructions.
-- [ ] Test: a stub model reads CLM-1001, its policy, its history and the wording, approves $420.00 under Section 3 and pays $420.00. The claim ends decided and paid $420.00, with one step for each tool call and one for the final reply, in order.
-- [ ] Test: a stub model approves CLM-1002 for $1,100.00 and then tries to pay it. The payment is refused, the claim waits for sign-off unpaid, and the refusal shows in the steps.
-- [ ] Test: a stub model approves $900.00 and then tries to pay $1,500.00. The payment is refused and nothing is paid.
-- [ ] Test: the agent's tool names match the API's operation ids.
-- [ ] Test: with `run` stubbed, `uv run -m agent` works only the claims that are waiting or in progress.
-- [ ] With the real model, at a fraction of a cent, `uv run -m backend.seed` and then `uv run -m agent CLM-1001`:
+- [x] `GET /api/instructions` returns the instructions.
+- [x] Test: a stub model reads CLM-1001, its policy, its history and the wording, approves $420.00 under Section 3 and pays $420.00. The claim ends decided and paid $420.00, with one step for each tool call and one for the final reply, in order.
+- [x] Test: a stub model approves CLM-1002 for $1,100.00 and then tries to pay it. The payment is refused, the claim waits for sign-off unpaid, and the refusal shows in the steps.
+- [x] Test: a stub model approves $900.00 and then tries to pay $1,500.00. The payment is refused and nothing is paid.
+- [x] Test: the agent's tool names match the API's operation ids.
+- [x] Test: with `run` stubbed, `uv run -m agent` works only the claims that are waiting or in progress.
+- [x] With the real model, at a fraction of a cent, `uv run -m backend.seed` and then `uv run -m agent CLM-1001`:
   - prints one line with a decision and a payout
   - leaves `GET /api/claims/CLM-1001` showing the decision, two or three sentences of reasons and a policy section
   - leaves `GET /api/claims/CLM-1001/steps` showing the claim, policy, history and wording being read, the decision being recorded, and the final reply
-- [ ] `npm run check:python` passes.
+- [x] `npm run check:python` passes.
 
 ## Phase 4: The dashboard and the queue
 

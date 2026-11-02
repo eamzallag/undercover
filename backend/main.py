@@ -5,6 +5,7 @@ import sqlite3
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from datetime import UTC, datetime
+from pathlib import Path
 from typing import Annotated, Any, NoReturn
 
 from fastapi import Depends, FastAPI, HTTPException
@@ -18,6 +19,7 @@ from backend.models import (
     ClaimSummary,
     Decision,
     DecisionRequest,
+    Instructions,
     Payment,
     PaymentRequest,
     Plan,
@@ -42,6 +44,8 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 app = FastAPI(title="UnderCover", lifespan=lifespan)
 
 Db = Annotated[sqlite3.Connection, Depends(db.get_db)]
+
+INSTRUCTIONS = Path(__file__).parent / "instructions.md"
 
 CLAIMS = (
     "SELECT claims.*, json_extract(customers.data, '$.name') AS customer_name "
@@ -209,6 +213,12 @@ def get_policy_wording(conn: Db) -> PolicyWording:
         "SELECT version, text FROM documents WHERE name = 'policy_wording'"
     ).fetchone()
     return PolicyWording(version=row["version"], text=row["text"])
+
+
+@app.get("/api/instructions", operation_id="get_instructions")
+def get_instructions() -> Instructions:
+    """Get the agent's instructions."""
+    return Instructions(text=INSTRUCTIONS.read_text(encoding="utf-8"))
 
 
 @app.post("/api/claims/{claim_id}/start", operation_id="start_claim")
