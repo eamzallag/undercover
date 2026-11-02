@@ -127,8 +127,8 @@ While `npm run dev` is running, you can try every operation in the browser at ht
 
 **Success criteria**
 
-- [ ] Tests cover every rule above, with each allowed and each refused case. They include the boundary: a payout of $1,000.00 pays straight away, and $1,000.01 waits for sign-off.
-- [ ] Against the running backend, this sequence gives these responses. The amounts only check the mechanics; they aren't a decision on CLM-1002.
+- [x] Tests cover every rule above, with each allowed and each refused case. They include the boundary: a payout of $1,000.00 pays straight away, and $1,000.01 waits for sign-off.
+- [x] Against the running backend, this sequence gives these responses. The amounts only check the mechanics; they aren't a decision on CLM-1002.
   1. `POST /api/claims/CLM-1002/start` with `{"thread_id": "check-1"}` returns status `in_progress`
   2. `POST /api/claims/CLM-1002/steps` with `{"kind": "message", "title": "Check", "detail": "A test step"}`, then `GET /api/claims/CLM-1002/steps`, returns that one step
   3. `POST /api/claims/CLM-1002/decision` with `{"decision": "approve", "payout": 1100, "reasons": "A check.", "policy_section": "Section 5, Baggage and Personal Effects"}` returns status `waiting_for_sign_off`
@@ -136,7 +136,7 @@ While `npm run dev` is running, you can try every operation in the browser at ht
   5. `POST /api/claims/CLM-1002/sign-off` with `{"handler_id": "HND-01"}` returns status `decided`, paid $1,100.00, signed off by Dana Whitfield
   6. `POST /api/claims/CLM-1002/payment` with `{"amount": 1100}` returns 409, because the claim is already paid
   7. After `uv run -m backend.seed`, CLM-1002 is waiting again, with no steps
-- [ ] `npm run check:python` passes.
+- [x] `npm run check:python` passes.
 
 ## Phase 3: The UnderCover Agent
 
