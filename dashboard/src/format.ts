@@ -42,3 +42,11 @@ export function label(code: string): string {
   const words = code.replaceAll("_", " ");
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
+
+export function pretty(detail: string): string {
+  try {
+    return JSON.stringify(JSON.parse(detail), null, 2);
+  } catch {
+    return detail;
+  }
+}

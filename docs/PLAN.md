@@ -226,20 +226,20 @@ The model doesn't change from the skeleton: `openai/gpt-6-luna` at low reasoning
 
 **Success criteria**
 
-- [ ] vitest: the claim page renders each part for a waiting claim, an in-progress claim, a claim waiting for sign-off, a paid claim and a declined claim, and shows "Claim not found" for an unknown id.
-- [ ] vitest: new steps appear on the next refresh.
-- [ ] vitest: the instructions page shows the text and has no input, text area or button.
-- [ ] Playwright: clicking CLM-1001 in the queue opens its page, with the story, the three items totaling $420.00, the four documents and the Premium plan.
-- [ ] Playwright: the test plays the agent's part on CLM-1002 through the API (start, two steps, then approve for $1,100.00). The claim's page then shows:
+- [x] vitest: the claim page renders each part for a waiting claim, an in-progress claim, a claim waiting for sign-off, a paid claim and a declined claim, and shows "Claim not found" for an unknown id.
+- [x] vitest: new steps appear on the next refresh.
+- [x] vitest: the instructions page shows the text and has no input, text area or button.
+- [x] Playwright: clicking CLM-1001 in the queue opens its page, with the story, the three items totaling $420.00, the four documents and the Premium plan.
+- [x] Playwright: the test plays the agent's part on CLM-1002 through the API (start, two steps, then approve for $1,100.00). The claim's page then shows:
   - the status Waiting for sign-off
   - the reasons and the policy section
   - both steps, in order
   - "Payment of $1,100.00 waits for a handler's sign-off"
 
   The queue shows the same status.
-- [ ] Playwright: the instructions page shows the instructions.
-- [ ] Playwright MCP: with `npm run dev` running and http://localhost:5173/claims/CLM-1003 open, `uv run -m agent CLM-1003` makes the steps appear one at a time without a reload, followed by the decision. Take screenshots in light and dark mode.
-- [ ] `npm run check` passes.
+- [x] Playwright: the instructions page shows the instructions.
+- [x] Playwright MCP: with `npm run dev` running and http://localhost:5173/claims/CLM-1003 open, `uv run -m agent CLM-1003` makes the steps appear one at a time without a reload, followed by the decision. Take screenshots in light and dark mode.
+- [x] `npm run check` passes.
 
 ## Phase 6: The whole queue
 
