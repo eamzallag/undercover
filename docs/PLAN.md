@@ -256,14 +256,14 @@ Nothing new, unless the run finds a problem:
 
 **Success criteria**
 
-- [ ] After `uv run -m backend.seed`, `uv run -m agent` works all 25 claims. It ends with a summary such as `25 claims: 14 approved, 6 declined, 5 referred. 4 wait for sign-off.` The numbers depend on the model, and the run should cost a few cents.
-- [ ] `GET /api/claims` shows no claim waiting or in progress.
-- [ ] Every approval over $1,000 is waiting for sign-off and unpaid, and every other approval is paid exactly its payout. Declines and referrals have a payout of $0 and no payment.
-- [ ] Every decision has reasons and a policy section.
-- [ ] Playwright MCP: the queue shows the final counts. An approved claim, a declined claim, a referred claim and a claim waiting for sign-off each show their decision, reasons, policy section and steps.
-- [ ] Sign off one waiting claim as HND-01 at http://localhost:8000/docs. Its page then shows it paid and signed off by Dana Whitfield.
-- [ ] `docs/STATUS.md` says what's built, how to run it (`npm run dev`, `npm run seed` and `uv run -m agent`) and what isn't built yet.
-- [ ] `npm run check` passes, and the results are reported.
+- [x] After `uv run -m backend.seed`, `uv run -m agent` works all 25 claims. It ends with a summary such as `25 claims: 14 approved, 6 declined, 5 referred. 4 wait for sign-off.` The numbers depend on the model, and the run should cost a few cents.
+- [x] `GET /api/claims` shows no claim waiting or in progress.
+- [x] Every approval over $1,000 is waiting for sign-off and unpaid, and every other approval is paid exactly its payout. Declines and referrals have a payout of $0 and no payment.
+- [x] Every decision has reasons and a policy section.
+- [x] Playwright MCP: the queue shows the final counts. An approved claim, a declined claim, a referred claim and a claim waiting for sign-off each show their decision, reasons, policy section and steps.
+- [x] Sign off one waiting claim as HND-01 at http://localhost:8000/docs. Its page then shows it paid and signed off by Dana Whitfield.
+- [x] `docs/STATUS.md` says what's built, how to run it (`npm run dev`, `npm run seed` and `uv run -m agent`) and what isn't built yet.
+- [x] `npm run check` passes, and the results are reported.
 
 ## Questions for your review
 

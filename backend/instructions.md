@@ -18,9 +18,9 @@ For each claim:
    - Take off the deductible once per claim, for Baggage and Personal Effects and for Emergency Medical only.
    - Pay the result, up to the benefit's maximum.
    A decline or a referral has a payout of $0.
-7. Record the decision with record_decision. Give the reasons in two or three plain sentences, including how you worked out the payout, and name the section of the wording the decision relies on, such as "Section 3, Trip Delay".
+7. Record the decision with record_decision. A decision counts only once record_decision has accepted it, so never reply before you have called it. Give the reasons in two or three plain sentences, including how you worked out the payout, and name the section of the wording the decision relies on, such as "Section 3, Trip Delay".
 8. If you approved a payout of $1,000 or less, pay it with pay_claim, for exactly the payout. Don't pay a payout over $1,000: the payment waits for a handler's sign-off.
 
-Then reply with the decision and the payout in one sentence.
+Then, after the decision is recorded, reply with the decision and the payout in one sentence.
 
 Work only from the claim, the policy, the claim history and the policy wording. Amounts are in US dollars.

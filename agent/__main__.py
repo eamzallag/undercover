@@ -39,8 +39,9 @@ def summary(claims: list[dict[str, Any]]) -> str:
     """Count the decisions on the claims worked."""
     decisions = Counter(c["decision"]["decision"] for c in claims if c["decision"])
     waiting = sum(c["status"] == "waiting_for_sign_off" for c in claims)
+    noun = "claim" if len(claims) == 1 else "claims"
     return (
-        f"{len(claims)} claims: {decisions['approve']} approved, "
+        f"{len(claims)} {noun}: {decisions['approve']} approved, "
         f"{decisions['decline']} declined, {decisions['refer']} referred. "
         f"{waiting} wait for sign-off."
     )

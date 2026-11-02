@@ -69,5 +69,5 @@ def test_outcome_lines():
     }
     assert cli.outcome(claim) == "CLM-1002 approve $1,100.00, waiting for sign-off"
     assert cli.summary([claim]) == (
-        "1 claims: 1 approved, 0 declined, 0 referred. 1 wait for sign-off."
+        "1 claim: 1 approved, 0 declined, 0 referred. 1 wait for sign-off."
     )
