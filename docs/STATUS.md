@@ -1,6 +1,6 @@
 # Status
 
-The pilot is being built from `docs/PLAN.md`. Phases 1 to 3 of 6 are done.
+The pilot is being built from `docs/PLAN.md`. Phases 1 to 4 of 6 are done.
 
 ## Built
 
@@ -10,8 +10,8 @@ The pilot is being built from `docs/PLAN.md`. Phases 1 to 3 of 6 are done.
   - The $1,000 rule: `pay_claim` refuses a payout over $1,000 until a handler signs off, and any amount that differs from the approved payout. `sign_off_claim` pays the claim.
   - The agent's instructions: `backend/instructions.md`, served by `get_instructions`
 - `agent/`: the UnderCover Agent, LangChain's `create_agent` on OpenRouter. `run(claim_id, thread_id)` starts the claim, streams the agent and posts each step to the backend. Its six tools are the API operations `get_claim`, `get_policy`, `get_claim_history`, `get_policy_wording`, `record_decision` and `pay_claim`.
-- `dashboard/`: still the skeleton, one page that shows whether the backend is up
-- `e2e/`: one test of that page
+- `dashboard/`: React and Vite in the brand's fonts and colors, with light and dark mode. The queue page has a count for each status and a table of every claim, refreshing every two seconds.
+- `e2e/`: Playwright tests of the queue and the light and dark themes. They run against their own backend (port 8765) and dashboard (port 5174) on a fresh database, `e2e/undercover-e2e.db`, so they never touch the data `npm run dev` uses.
 
 ## Run it
 

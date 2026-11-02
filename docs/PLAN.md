@@ -19,6 +19,8 @@ There are six phases, and each builds on the one before:
 
 Each phase ends with its tests, every check passing, `docs/STATUS.md` updated and a commit.
 
+The Playwright MCP server wasn't set up when the pilot was built, so the browser checks marked "Playwright MCP" ran as Playwright scripts against `npm run dev` instead: the same pages, screenshots and live updates.
+
 ## How it fits together
 
 ```
@@ -48,7 +50,7 @@ waiting ──start──> in progress ──decision──> decided
 - **The instructions live with the backend** in `backend/instructions.md` and are served read only by `get_instructions`. The agent fetches them at the start of each run, and the dashboard shows the same text.
 - **The policy wording comes through a tool,** so reading it shows as a step on the dashboard. It's the full `data/policy_wording.md`, about 2,000 tokens.
 - **The agent runs from the command line.** `uv run -m agent` works every waiting claim one at a time, and `uv run -m agent CLM-1001` works one. The spec asks the dashboard to show the work, not to start it.
-- **The end-to-end tests get their own backend and database** on ports 8001 and 5174, seeded fresh for each run. That way `npm run check` never changes your data while `npm run dev` is running.
+- **The end-to-end tests get their own backend and database** on ports 8765 and 5174, seeded fresh for each run. That way `npm run check` never changes your data while `npm run dev` is running.
 
 ## The API
 
@@ -189,20 +191,20 @@ The model doesn't change from the skeleton: `openai/gpt-6-luna` at low reasoning
   - a table with each claim's id, customer, type, summary, amount claimed, status, decision and payout
   - decision badges: Approve in Sea Green, Refer in Marigold, Decline in Coral
   - ids and amounts in JetBrains Mono, with money shown as $1,250.00
-- **`playwright.config.ts`:** the end-to-end run gets its own backend, on port 8001 with `e2e/undercover-e2e.db` seeded fresh. It also gets its own dashboard on port 5174, whose API proxy points at port 8001 through `UNDERCOVER_API` in `vite.config.ts`.
+- **`playwright.config.ts`:** the end-to-end run gets its own backend, on port 8765 with `e2e/undercover-e2e.db` seeded fresh. It also gets its own dashboard on port 5174, whose API proxy points at port 8765 through `UNDERCOVER_API` in `vite.config.ts`.
 - The queue replaces the skeleton's health page and its tests. The health route stays, because Playwright uses it to know the backend is up.
 
 **Why now:** the backend and agent are producing real data. The queue is the team's main screen, and setting the brand and layout here means the claim page only has to add content.
 
 **Success criteria**
 
-- [ ] vitest: the queue renders a stubbed API's claims, with status labels, counts per status and money such as `$1,150.00`. Each claim links to its page, and a status change shows up on the next refresh.
-- [ ] Playwright: the queue shows 25 claims, including CLM-1001 for Maya Patel, Trip delay, $420.00, Waiting.
-- [ ] Playwright: the page background is `#F0F4F5` in light mode and `#04232E` in dark mode.
-- [ ] Running `npm run e2e` while `npm run dev` is running leaves the dev database as it was.
-- [ ] Playwright MCP, with `npm run dev` running: http://localhost:5173 shows the header, the four tiles and 25 rows in the brand's fonts and colors. Panels have no border on one edge and there's no line across the top of the page. Take screenshots in light and dark mode.
-- [ ] Playwright MCP: with the queue open, `uv run -m agent CLM-1001` moves CLM-1001 from Waiting to In progress to Decided without a reload.
-- [ ] `npm run check:ts` and `npm run e2e` pass.
+- [x] vitest: the queue renders a stubbed API's claims, with status labels, counts per status and money such as `$1,150.00`. Each claim links to its page, and a status change shows up on the next refresh.
+- [x] Playwright: the queue shows 25 claims, including CLM-1001 for Maya Patel, Trip delay, $420.00, Waiting.
+- [x] Playwright: the page background is `#F0F4F5` in light mode and `#04232E` in dark mode.
+- [x] Running `npm run e2e` while `npm run dev` is running leaves the dev database as it was.
+- [x] Playwright MCP, with `npm run dev` running: http://localhost:5173 shows the header, the four tiles and 25 rows in the brand's fonts and colors. Panels have no border on one edge and there's no line across the top of the page. Take screenshots in light and dark mode.
+- [x] Playwright MCP: with the queue open, `uv run -m agent CLM-1001` moves CLM-1001 from Waiting to In progress to Decided without a reload.
+- [x] `npm run check:ts` and `npm run e2e` pass.
 
 ## Phase 5: The claim page, the agent's steps and the instructions
 

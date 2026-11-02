@@ -1,19 +1,31 @@
-import { useEffect, useState } from "react";
+import { Link, NavLink, Route, Routes } from "react-router";
+import { QueuePage } from "./QueuePage";
 
 export function App() {
-  const [status, setStatus] = useState("checking");
-
-  useEffect(() => {
-    void fetch("/api/health")
-      .then((response) => (response.ok ? "up" : "down"))
-      .catch(() => "down")
-      .then(setStatus);
-  }, []);
-
   return (
-    <main>
-      <h1>UnderCover</h1>
-      <p>Backend: {status}</p>
-    </main>
+    <div className="shell">
+      <header className="header">
+        <Link className="brand" to="/">
+          <span className="brand-name">UnderCover</span>
+          <span className="tagline">The claims desk</span>
+        </Link>
+        <nav className="nav" aria-label="Main">
+          <NavLink to="/" end>
+            Queue
+          </NavLink>
+        </nav>
+      </header>
+      <Routes>
+        <Route path="/" element={<QueuePage />} />
+        <Route
+          path="*"
+          element={
+            <main className="page">
+              <h1>Page not found</h1>
+            </main>
+          }
+        />
+      </Routes>
+    </div>
   );
 }
